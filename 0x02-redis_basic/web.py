@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-Web cache and tracker
-"""
+""" Web cache and tracker """
 import requests
 import redis
 from functools import wraps
@@ -14,8 +12,6 @@ def count_url_access(method):
     a URL is accessed """
     @wraps(method)
     def wrapper(url):
-    """wrapper function that tracks URL
-    access count and caches data"""
         cached_key = "cached:" + url
         cached_data = store.get(cached_key)
         if cached_data:
@@ -33,6 +29,7 @@ def count_url_access(method):
 
 @count_url_access
 def get_page(url: str) -> str:
-    """function to retrive HTML content of a URL"""
+    """function to retrive HTML
+    content of a URL"""
     res = requests.get(url)
     return res.text
