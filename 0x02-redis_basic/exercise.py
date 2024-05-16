@@ -65,7 +65,7 @@ class Cache:
     @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
-        '''takes a data argument and returns a string'''
+        '''method to store data in cache and return generated key'''
         rkey = str(uuid4())
         self._redis.set(rkey, data)
         return rkey
@@ -79,12 +79,12 @@ class Cache:
         return value
 
     def get_str(self, key: str) -> str:
-        '''parametrize Cache.get with correct conversion function'''
+        '''Method to retrieve data from cache as a string'''
         value = self._redis.get(key)
         return value.decode("utf-8")
 
     def get_int(self, key: str) -> int:
-        '''parametrize Cache.get with correct conversion function'''
+        '''Method to retrieve data from the cache as an integer'''
         value = self._redis.get(key)
         try:
             value = int(value.decode("utf-8"))
